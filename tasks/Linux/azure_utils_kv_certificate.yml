@@ -3,7 +3,7 @@
 
 - name: Retrive certificate
   ansible.builtin.uri:
-    url: https://{{ item.vault }}.vault.azure.net/certificates/{{ item.certificate_name }}?api-version=2016-10-01"
+    url: "https://{{ item.vault }}.vault.azure.net/certificates/{{ item.certificate_name }}?api-version=2016-10-01"
     method: GET
     return_content: true
     headers:
