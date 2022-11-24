@@ -1,0 +1,13 @@
+---
+- hosts: all
+
+
+  pre_tasks:
+    - name: add vars file 
+      ansible.builtin.include_vars:
+        file: vars/main.yml
+
+  tasks:
+    - name: run capabilty 
+      ansible.builtin.include_tasks:
+        file: tasks/main.yml

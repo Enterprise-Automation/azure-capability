@@ -1,0 +1,10 @@
+---
+# vars file for azurecapability
+
+
+azure_key_vault:
+  key_vault_url: https://clarktest.vault.azure.net
+  secrets_name: testing
+  certificate_name: TestCertificate
+  key_name: ClarkKey
+ 

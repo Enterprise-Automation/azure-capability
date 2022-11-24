@@ -1,0 +1,65 @@
+---
+# tasks file for azurecapability
+
+
+
+- name: Access Token directive
+  ansible.windows.win_uri:
+    url: http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fvault.azure.net
+    method: GET
+    return_content: true
+    headers:
+      Metadata: true
+  register: Response
+
+- name: Access Token directive Response access_token
+  debug:
+    msg: "{{ Response.json.access_token }}"
+
+
+- name: Retrive secret
+  ansible.windows.win_uri:
+    url: "{{ azure_key_vault.key_vault_url }}/secrets/{{ azure_key_vault.secrets_name }}?api-version=2016-10-01"
+    method: GET
+    return_content: true
+    headers:
+      Authorization: "Bearer {{ Response.json.access_token }}"
+  register: secret
+
+
+- name: output secret
+  debug:
+    msg: "{{ secret.json.value }}"
+
+
+- name: Retrive certificate
+  ansible.windows.win_uri:
+    url: "{{ azure_key_vault.key_vault_url }}/certificates/{{ azure_key_vault.certificate_name }}?api-version=2016-10-01"
+    method: GET
+    return_content: true
+    headers:
+      Authorization: "Bearer {{ Response.json.access_token }}"
+  register: certificate
+
+- name: output secret
+  debug:
+    msg: "{{ certificate.json.cer }}"
+
+
+- name: Retrive key
+  ansible.windows.win_uri:
+    url: "{{ azure_key_vault.key_vault_url }}/keys/{{ azure_key_vault.key_name }}?api-version=2016-10-01"
+    method: GET
+    return_content: true
+    headers:
+      Authorization: "Bearer {{ Response.json.access_token }}"
+  register: key
+
+- name: output secret
+  debug:
+    msg: "{{ key.json.key }}"
+
+
+# key
+# name
+# ClarkKey
