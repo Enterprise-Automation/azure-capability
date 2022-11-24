@@ -1,0 +1,15 @@
+---
+
+
+  - name: Retrive key
+    ansible.builtin.uri:
+      url: "{{ azure_key_vault.key_vault_url }}/keys/{{ azure_key_vault.key_name }}?api-version=2016-10-01"
+      method: GET
+      return_content: true
+      headers:
+        Authorization: "Bearer {{ token_directive.json.access_token }}"
+    register: key
+
+  - name: output secret
+    debug:
+      msg: "{{ key.json.key }}"

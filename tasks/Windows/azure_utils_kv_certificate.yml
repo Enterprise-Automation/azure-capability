@@ -1,0 +1,19 @@
+---
+  
+- name: Retrive certificate
+  ansible.windows.win_uri:
+    url: "https://{{ item.vault }}.vault.azure.net/certificates/{{ item.certificate_name }}?api-version=2016-10-01"
+    method: GET
+    return_content: true
+    headers:
+      Authorization: "Bearer {{ token_directive.json.access_token }}"
+  register: certificate
+
+- name: output secret
+  debug:
+    msg: "{{ certificate.json.cer }}"
+
+- name: Set the contents of a file
+  ansible.windows.win_copy:
+    content: "{{ certificate.json.cer }}"
+    dest: "{{ item.cert_output_path }}"

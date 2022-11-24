@@ -4,10 +4,10 @@
 - name: linux commands 
   when: ansible_system == "Linux"
   ansible.builtin.include_tasks:
-    file: lin.yml
+    file: Linux/main.yml
 
 
-- name: windows commands 
-  when: ansible_os_family == "Windows"
-  ansible.builtin.include_tasks:
-    file: win.yml
+# - name: windows commands 
+#   when: ansible_os_family == "Windows"
+#   ansible.builtin.include_tasks:
+#     file: Windows/main.yml

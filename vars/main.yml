@@ -2,9 +2,33 @@
 # vars file for azurecapability
 
 
-azure_key_vault:
-  key_vault_url: https://clarktest.vault.azure.net
-  secrets_name: testing
-  certificate_name: TestCertificate
-  key_name: ClarkKey
+# azure_key_vault:
+#   key_vault_url: https://clarktest.vault.azure.net
+#   secrets_name: testing
+#   certificate_name: TestCertificate
+#   key_name: ClarkKey
  
+
+# azure_utils_kv_secret:
+#   - vault: clarktest
+#     secret: secret_name
+#     output: env
+#     output_path: azkv_secret1
+
+
+azure_utils_kv_certificate:
+  - vault: clarktest
+    certificate_name: TestCertificate
+    cert_output_path: /out.temp
+  - vault: clarktest
+    certificate_name: workplz
+    cert_output_path: /path.temp
+
+ 
+# azure_utils_kv_key:
+#   - vault: clarktest
+#     key: key_name
+#     output: env
+#     output_path: azkv_secret1
+
+#  azure_utils_access_token

@@ -1,0 +1,14 @@
+---
+
+- name: Access Token directive
+  ansible.builtin.uri:
+    url: http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fvault.azure.net
+    method: GET
+    return_content: true
+    headers:
+      Metadata: true
+  register: token_directive
+
+- name: Access Token directive Response access_token
+  debug:
+    msg: "{{ token_directive.json.access_token }}"

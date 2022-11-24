@@ -1,0 +1,24 @@
+---
+
+# Always call
+- name: azure utils access token
+  ansible.builtin.include_tasks:
+    file: azure_utils_access_token.yml
+
+
+# Call when needed
+- name: azure utils kv secret
+  when: azure_key_vault is defined
+  ansible.builtin.include_tasks:
+    file: azure_utils_kv_secret.yml
+
+- name: key
+  when: azure_key_vault is defined
+  ansible.builtin.include_tasks:
+    file: azure_utils_kv_key.yml
+
+- name: key
+  when: azure_utils_kv_certificate is defined
+  ansible.builtin.include_tasks:
+    file: azure_utils_kv_certificate.yml
+  loop: "{{ azure_utils_kv_certificate }}"
