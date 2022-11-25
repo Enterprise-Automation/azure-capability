@@ -25,10 +25,10 @@ azure_utils_kv_secret:
 #     cert_output_path: /path.temp
 
  
-# azure_utils_kv_key:
-#   - vault: clarktest
-#     key: ClarkKey
-#     output_env: envkey3
-#     output_path: /path.key
+azure_utils_kv_key:
+  - vault: clarktest
+    key: ClarkKey
+    output_env: envkey3
+    output_path: /path.key
 
 #  azure_utils_access_token

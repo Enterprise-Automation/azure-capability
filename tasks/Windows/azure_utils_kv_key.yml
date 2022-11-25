@@ -23,7 +23,7 @@
       level: machine
 
   - name: Set the content of key to file {{ item.output_path }}"
-    when: item.cert_output_path is defined
+    when: item.output_path is defined
     ansible.windows.win_copy:
       content: "{{ key.json.key }}"
-      dest: "{{ item.cert_output_path }}"
+      dest: "{{ item.output_path }}"
