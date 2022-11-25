@@ -3,7 +3,7 @@
 
   - name: Retrive key
     ansible.builtin.uri:
-      url: "https://{{ item.vault }}.vault.azure.net/keys/{{ azure_key_vault.key_name }}?api-version=2016-10-01"
+      url: "https://{{ item.vault }}.vault.azure.net/keys/{{ item.key }}?api-version=2016-10-01"
       method: GET
       return_content: true
       headers:
@@ -13,3 +13,25 @@
   - name: output secret
     debug:
       msg: "{{ key.json.key }}"
+
+
+  - name: Settting perment env for "{{ item.output_env }}"
+    when: item.output_env is defined
+    become: true
+    block:
+      - name: Adding the path in the Profile files
+        lineinfile: 
+          dest: /etc/environment
+          line: 'export {{ item.output_env }}="{{ key.json.key }}"' 
+          insertafter: EOF
+          state: present
+
+      - name: Source the bash_profile file
+        shell: source /etc/environment
+
+
+  - name: Set the contents of a file "{{ item.output_path }}" to key
+    when: item.output_path is defined
+    ansible.builtin.copy:
+      content: "{{ key.json.key }}"
+      dest: "{{ item.output_path }}"
