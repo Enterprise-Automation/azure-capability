@@ -4,15 +4,23 @@
 
 azure_utils_kv_secret:
   - vault: clarktest
+    base_url: vault.azure.net
+    api-version: "2016-10-01"
     secret: testing
     output_env: env_secret7
     output_path: /azkv_secret1.txt
+
+
+# base_url
+# api-version
 
 
 azure_utils_kv_certificate:
   - vault: clarktest
     certificate_name: TestCertificate
     cert_output_path: /out.temp
+    base_url: vault.azure.net
+    api_version: "2016-10-01"
   - vault: clarktest
     certificate_name: workplz
     cert_output_path: /path.temp

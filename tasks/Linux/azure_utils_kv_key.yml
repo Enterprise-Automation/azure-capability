@@ -3,7 +3,7 @@
 
   - name: Retrive key
     ansible.builtin.uri:
-      url: "https://{{ item.vault }}.vault.azure.net/keys/{{ item.key }}?api-version=2016-10-01"
+      url: "https://{{ item.vault }}.{{ item.base_url | default('vault.azure.net') }}/keys/{{ item.key }}?api-version={{ item.api_version | default('2016-10-01') }}"
       method: GET
       return_content: true
       headers:

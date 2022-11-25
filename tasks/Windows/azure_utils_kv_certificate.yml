@@ -2,14 +2,14 @@
   
 - name: Retrive certificate
   ansible.windows.win_uri:
-    url: "https://{{ item.vault }}.vault.azure.net/certificates/{{ item.certificate_name }}?api-version=2016-10-01"
+    url: "https://{{ item.vault }}.{{ item.base_url | default('vault.azure.net') }}/certificates/{{ item.certificate_name }}?api-version={{ item.api_version | default('2016-10-01') }}"
     method: GET
     return_content: true
     headers:
       Authorization: "Bearer {{ token_directive.json.access_token }}"
   register: certificate
 
-- name: output secret
+- name: output certificate
   debug:
     msg: "{{ certificate.json.cer }}"
 
