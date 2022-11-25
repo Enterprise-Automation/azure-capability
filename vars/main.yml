@@ -9,20 +9,20 @@
 #   key_name: ClarkKey
  
 
-# azure_utils_kv_secret:
+azure_utils_kv_secret:
+  - vault: clarktest
+    secret: secret_name
+    output: env
+    output_path: azkv_secret1
+
+
+# azure_utils_kv_certificate:
 #   - vault: clarktest
-#     secret: secret_name
-#     output: env
-#     output_path: azkv_secret1
-
-
-azure_utils_kv_certificate:
-  - vault: clarktest
-    certificate_name: TestCertificate
-    cert_output_path: /out.temp
-  - vault: clarktest
-    certificate_name: workplz
-    cert_output_path: /path.temp
+#     certificate_name: TestCertificate
+#     cert_output_path: /out.temp
+#   - vault: clarktest
+#     certificate_name: workplz
+#     cert_output_path: /path.temp
 
  
 # azure_utils_kv_key:

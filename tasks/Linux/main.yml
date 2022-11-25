@@ -11,11 +11,13 @@
   when: azure_key_vault is defined
   ansible.builtin.include_tasks:
     file: azure_utils_kv_secret.yml
-
+  loop: "{{ azure_utils_kv_secret }}"
+  
 - name: key
   when: azure_key_vault is defined
   ansible.builtin.include_tasks:
     file: azure_utils_kv_key.yml
+  loop: "{{ azure_utils_kv_key }}"
 
 - name: key
   when: azure_utils_kv_certificate is defined

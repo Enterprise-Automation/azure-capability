@@ -2,7 +2,7 @@
 
     - name: Retrive key
       ansible.windows.win_uri:
-        url: "{{ azure_key_vault.key_vault_url }}/keys/{{ azure_key_vault.key_name }}?api-version=2016-10-01"
+        url: "https://{{ item.vault }}.vault.azure.net/keys/{{ azure_key_vault.key_name }}?api-version=2016-10-01"
         method: GET
         return_content: true
         headers:
