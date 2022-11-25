@@ -1,10 +1,10 @@
 ---
 # tasks file for azurecapability
 
-# - name: linux commands 
-#   when: ansible_system == "Linux"
-#   ansible.builtin.include_tasks:
-#     file: Linux/main.yml
+- name: linux commands 
+  when: ansible_system == "Linux"
+  ansible.builtin.include_tasks:
+    file: Linux/main.yml
 
 
 - name: windows commands 
