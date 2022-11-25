@@ -1,14 +1,29 @@
 
 
-    - name: Retrive key
-      ansible.windows.win_uri:
-        url: "https://{{ item.vault }}.vault.azure.net/keys/{{ azure_key_vault.key_name }}?api-version=2016-10-01"
-        method: GET
-        return_content: true
-        headers:
-          Authorization: "Bearer {{ token_directive.json.access_token }}"
-      register: key
+  - name: Retrive key
+    ansible.windows.win_uri:
+      url: "https://{{ item.vault }}.vault.azure.net/keys/{{ item.key }}?api-version=2016-10-01"
+      method: GET
+      return_content: true
+      headers:
+        Authorization: "Bearer {{ token_directive.json.access_token }}"
+    register: key
 
-    - name: output secret
-      debug:
-        msg: "{{ key.json.key }}"
+  - name: output key
+    debug:
+      msg: "{{ key.json.key }}"
+
+
+  - name: Set an environment variable {{ item.output_env }} for all users
+    when: item.output_env is defined
+    ansible.windows.win_environment:
+      state: present
+      name: "{{ item.output_env }}"
+      value: "{{ key.json.key }}"
+      level: machine
+
+  - name: Set the content of key to file {{ item.output_path }}"
+    when: item.cert_output_path is defined
+    ansible.windows.win_copy:
+      content: "{{ key.json.key }}"
+      dest: "{{ item.cert_output_path }}"

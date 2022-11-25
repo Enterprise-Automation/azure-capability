@@ -11,9 +11,9 @@
 
 azure_utils_kv_secret:
   - vault: clarktest
-    secret: secret_name
-    output: env
-    output_path: azkv_secret1
+    secret: testing
+    output_env: env_secret7
+    output_path: /azkv_secret1.txt
 
 
 # azure_utils_kv_certificate:
@@ -27,8 +27,8 @@ azure_utils_kv_secret:
  
 # azure_utils_kv_key:
 #   - vault: clarktest
-#     key: key_name
-#     output: env
-#     output_path: azkv_secret1
+#     key: ClarkKey
+#     output_env: envkey3
+#     output_path: /path.key
 
 #  azure_utils_access_token

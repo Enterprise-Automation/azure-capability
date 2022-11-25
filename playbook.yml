@@ -1,7 +1,6 @@
 ---
 - hosts: all
 
-
   pre_tasks:
     - name: add vars file 
       ansible.builtin.include_vars:

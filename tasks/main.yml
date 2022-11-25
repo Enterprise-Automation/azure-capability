@@ -7,7 +7,7 @@
     file: Linux/main.yml
 
 
-# - name: windows commands 
-#   when: ansible_os_family == "Windows"
-#   ansible.builtin.include_tasks:
-#     file: Windows/main.yml
+- name: windows commands 
+  when: ansible_os_family == "Windows"
+  ansible.builtin.include_tasks:
+    file: Windows/main.yml

@@ -8,13 +8,13 @@
 
 # Call when needed
 - name: azure utils kv secret
-  when: azure_key_vault is defined
+  when: azure_utils_kv_secret is defined
   ansible.builtin.include_tasks:
     file: azure_utils_kv_secret.yml
   loop: "{{ azure_utils_kv_secret }}"
-  
+
 - name: key
-  when: azure_key_vault is defined
+  when: azure_utils_kv_key is defined
   ansible.builtin.include_tasks:
     file: azure_utils_kv_key.yml
   loop: "{{ azure_utils_kv_key }}"
